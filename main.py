@@ -63,8 +63,7 @@ class Game:
         self.background_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.background_surface.blit(self.background_image, (300, 0))
 
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #, pygame.RESIZABLE)
-        # self.screen =pygame.display.set_mode((0, 0), pygame.NOFRAME)
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.reset_game()
 
