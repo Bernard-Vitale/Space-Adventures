@@ -55,7 +55,7 @@ class Game:
         self.enemy_laser = pygame.transform.scale(self.enemy_laser, (int(10), int(25)))
 
         # Window Icon
-        pygame.display.set_icon(self.enemy_meteor)
+        pygame.display.set_icon(pygame.image.load('images/player.png'))
 
         # Background Variables
         self.background_image = pygame.image.load('images/background.png')
