@@ -26,6 +26,11 @@ These are the following features I want to or am planning to add:
 - **Sound Effects and Music**: Add background music and sound effects for a more immersive experience.
 - **Difficulty Levels**: Implement varying difficulty levels to provide a more tailored experience for different skill levels.
 
+## Technologies
+
+- **Python**: The programming language used for developing the game.
+- **Pygame**: A library used for game development, providing tools for rendering graphics, handling user input, and managing game states.
+
 ## Installation
 
 1. Clone the repository:
