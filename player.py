@@ -9,6 +9,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x, y))
         self.mask = pygame.mask.from_surface(self.image)
         self.laser = laser
+        self.laser_sound = pygame.mixer.Sound('sounds/player_laser.mp3')
+        self.laser_sound.set_volume(0.3)
 
     def move(self, delta_time, keys, border):
         if (keys[pygame.K_a] or keys[pygame.K_LEFT]) and self.rect.left > border + 8:
@@ -25,3 +27,4 @@ class Player(pygame.sprite.Sprite):
     def shoot(self, lasers):
         laser = Laser(self.rect.centerx - 5, self.rect.top, self.laser, 750)
         lasers.add(laser)
+        self.laser_sound.play()

@@ -11,6 +11,8 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x, y))  
         self.mask = pygame.mask.from_surface(self.image)
         self.laser = laser
+        self.laser_sound = pygame.mixer.Sound('sounds/enemy_laser.mp3')
+        self.laser_sound.set_volume(0.3)
 
     def update(self, delta_time, player, enemy_laser_group):
         self.rect.y += self.speed * delta_time 
@@ -26,4 +28,5 @@ class Enemy(pygame.sprite.Sprite):
         if current_time - self.last_shot_time > self.shot_cooldown:
             laser = Laser(self.rect.centerx - 5, self.rect.bottom, self.laser, 1000)
             enemy_laser_group.add(laser)
+            self.laser_sound.play()
             self.last_shot_time = current_time

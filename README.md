@@ -23,7 +23,6 @@ These are the following features I want to or am planning to add:
 - **Scrolling Background**: Add a moving background to give a better illusion of traveling through space.
 - **Full Screen Mode**: Add the ability for the game to be played in a full screen mode.
 - **Enhanced Graphics and Animations**: Improve game graphics with more detailed sprites. Add animations for various game events, such as explosions when ships or meteors are destroyed.
-- **Sound Effects and Music**: Add background music and sound effects for a more immersive experience.
 - **Additional Enemy Types**: Introduce new types of enemy ships with different behaviors and attack patterns.
 
 ## Technologies

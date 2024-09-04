@@ -22,6 +22,19 @@ class Game:
         self.meteors = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
+        # Sounds
+        self.damage_taken_sound = pygame.mixer.Sound('sounds/damage_taken.mp3')
+        self.damage_taken_sound.set_volume(0.3)
+        self.meteor_explosion = pygame.mixer.Sound('sounds/meteor_explosion.mp3')
+        self.meteor_explosion.set_volume(0.3)
+        self.enemy_explosion = pygame.mixer.Sound('sounds/enemy_explosion.mp3')
+        self.enemy_explosion.set_volume(0.3)
+        self.background_music = pygame.mixer.Sound('sounds/background_music.mp3')
+        self.background_music.set_volume(0.2)
+        self.player_death = pygame.mixer.Sound('sounds/player_explosion.mp3')
+        self.player_death.set_volume(0.4)
+
+
         # Buttons 
         self.play_button = pygame.image.load('images/playButton.png') 
         self.play_button = pygame.transform.scale(self.play_button, (200, 70))
@@ -137,6 +150,7 @@ class Game:
                 if pygame.sprite.collide_rect(laser, meteor):
                     laser.kill()
                     meteor.kill()
+                    self.meteor_explosion.play()
                     self.player_score += 1
                     self.meteors_destroyed += 1
                     break
@@ -146,6 +160,7 @@ class Game:
                 if pygame.sprite.collide_rect(laser, enemy):
                     laser.kill()
                     enemy.kill()
+                    self.enemy_explosion.play()
                     self.player_score += 2
                     self.enemies_destroyed += 1
                     break
@@ -163,6 +178,7 @@ class Game:
         for enemy_laser in self.enemy_lasers:
             if pygame.sprite.collide_rect(self.player, enemy_laser):
                 self.player_lives -= 1
+                self.damage_taken_sound.play()
                 enemy_laser.kill()
                 if self.player_lives == 0:
                     self.running = False
@@ -177,6 +193,7 @@ class Game:
                 offset = (self.player.rect.left - meteor.rect.left, self.player.rect.top - meteor.rect.top)
                 if self.player.mask.overlap(meteor.mask, offset):
                     self.player_lives -= 1
+                    self.damage_taken_sound.play()
                     meteor.kill()
                     if self.player_lives == 0:
                         self.running = False
@@ -189,6 +206,7 @@ class Game:
                 offset = (self.player.rect.left - enemy.rect.left, self.player.rect.top - enemy.rect.top)
                 if self.player.mask.overlap(enemy.mask, offset):
                     self.player_lives -= 1
+                    self.damage_taken_sound.play()
                     enemy.kill()
                     if self.player_lives == 0:
                         self.running = False
@@ -295,6 +313,7 @@ class Game:
         last_time = pygame.time.get_ticks()
         self.last_meteor_spawn_time = pygame.time.get_ticks()
         self.last_enemy_spawn_time = pygame.time.get_ticks()
+        self.background_music.play(-1)
         while self.running:
             self.handle_events()
 
@@ -318,7 +337,9 @@ class Game:
 
                 # Handle game over logic
                 if self.game_over:
+                    self.player_death.play()
                     self.running = False
+                    self.background_music.stop()
                     if show_game_over_screen(self.screen, self.player_score, self.background_image, self.restart_button, self.main_menu_button):
                         self.reset_game()
                     else:
@@ -340,6 +361,7 @@ class Game:
                     last_time += pygame.time.get_ticks() - pause_start_time
                 else:
                     self.running = False
+                    self.background_music.stop()
                     if show_main_menu(self.screen, self.play_button, self.quit_button, self.background_image):
                         self.reset_game()
                     else:
