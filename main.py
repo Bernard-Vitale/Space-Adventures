@@ -138,10 +138,10 @@ class Game:
             if laser.rect.bottom < 0:
                 laser.kill()
 
-        # Remove off-screen enemies
-        for enemy in self.enemies:
-            if enemy.rect.bottom > self.screen.get_height():
-                enemy.kill()
+        # # Remove off-screen enemies THIS IS HANDLE IN THE ENEMY CLASS UPDATE FUNCTION
+        # for enemy in self.enemies:
+        #     if enemy.rect.bottom > self.screen.get_height():
+        #         enemy.kill()
             
     def check_collisions(self):
         # Check laser and meteor collisions
